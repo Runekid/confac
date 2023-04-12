@@ -27,6 +27,13 @@ npm start
 ```bash
 docker run -id -p 32772:27017 -e "MONGO_INITDB_ROOT_USERNAME=admin" -e "MONGO_INITDB_ROOT_PASSWORD=pwd" -v /volume1/docker/mongo-data:/data/db --name confac-mongo mongo:3.6.3
 ```
+You then need to set these values in the .env file.
+
+MONGO_HOST=localhost
+MONGO_PORT=32772
+MONGO_USERNAME=admin
+MONGO_PASSWORD=pwd
+MONGO_DB=confac
 
 
 

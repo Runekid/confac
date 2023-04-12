@@ -2,10 +2,10 @@ import { ProjectConfig } from './models';
 
 
 const projectConfig: ProjectConfig = {
-  amount: 0, // amount of projects to insert
+  amount: 1, // amount of projects to insert
 
   // endDate: new Date('2023-02-01'),
-  startDate: new Date('2021-01-01'),
+  startDate: new Date('2023-04-01'),
 
   partnerProbability: 0.5,
   noEndDateProbability: 0.2,
@@ -13,12 +13,12 @@ const projectConfig: ProjectConfig = {
 
 
 const projectMonthsConfig = {
-  amount: 0,
+  amount: 1,
 };
 
 
 const invoicesConfig = {
-  amount: 0,
+  amount: 1,
 }
 
 
@@ -28,5 +28,5 @@ export const config = {
   projects: projectConfig,
   invoices: invoicesConfig,
   projectMonths: projectMonthsConfig,
-  roles: false, // insert basic admin role if it doesn't yet exist
+  roles: ['admin'], // insert basic admin role if it doesn't yet exist
 };
