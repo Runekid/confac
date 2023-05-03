@@ -1,7 +1,10 @@
+import NotVerifiedInvoicesList from "../measurements/invoice/NotVerifiedInvoicesList"
 
 const InvoiceSection = () => {
   return (
-    <div>InvoiceSection</div>
+    <>
+    <NotVerifiedInvoicesList/>
+    </>
   )
 }
 
