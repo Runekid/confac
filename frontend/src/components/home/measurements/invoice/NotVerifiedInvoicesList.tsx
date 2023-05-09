@@ -32,7 +32,7 @@ const NotVerifiedInvoicesList = () => {
 
   return (
     <>
-      <Link>
+      <Link to={`/invoices`}>
         <h5>{t("measurements.invoiceSection.dueInvoicesList.title")}</h5>
       </Link>
       <Table>
