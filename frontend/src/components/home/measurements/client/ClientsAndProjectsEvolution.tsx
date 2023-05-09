@@ -8,6 +8,8 @@ import { useState } from "react";
 import moment, { Moment } from "moment";
 import { useSelector } from "react-redux";
 import { ConfacState } from "../../../../reducers/app-state";
+import { t } from "../../../utils";
+import { Link } from "react-router-dom";
 
 export interface clientChartData {
   year: number;
@@ -23,7 +25,7 @@ const ClientsAndProjectsEvolution = () => {
     clients: state.clients,
     projects: state.projects,
   }));
-  console.log(models)
+  console.log(models);
 
   let interim = from.clone();
   let timeValues: Moment[] = [];
@@ -37,7 +39,7 @@ const ClientsAndProjectsEvolution = () => {
     return {
       year: date.year(),
       monthIndex: date.month(),
-      month: date.format("MM"),
+      month: date.format("MMM"),
       clients: null,
       clientsWithProjects: null,
     };
@@ -99,6 +101,9 @@ const ClientsAndProjectsEvolution = () => {
 
   return (
     <>
+      <Link to={`/clients`}>
+        <h5>{t("measurements.clientSection.clientsAndProjectsEvolution.title")}</h5>
+      </Link>
       <ClientsAndProjectsEvolutionList
         from={from}
         to={to}
@@ -109,7 +114,7 @@ const ClientsAndProjectsEvolution = () => {
         <Row>
           <Col>
             <MonthPicker
-              label="from"
+              label={t("measurements.from")}
               value={from}
               onChange={(value) => {
                 value && value < to && setFrom(value);
@@ -118,7 +123,7 @@ const ClientsAndProjectsEvolution = () => {
           </Col>
           <Col>
             <MonthPicker
-              label="to"
+              label={t("measurements.to")}
               value={to}
               onChange={(value) => {
                 value && value > from && setTo(value);
