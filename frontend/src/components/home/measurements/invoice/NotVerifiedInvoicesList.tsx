@@ -5,6 +5,7 @@ import { t } from "../../../utils";
 import { Table } from "react-bootstrap";
 import moment from "moment";
 import InvoiceModel from "../../../invoice/models/InvoiceModel";
+import { Link } from "react-router-dom";
 
 const NotVerifiedInvoicesList = () => {
   const models = useSelector((state: ConfacState) => ({
@@ -31,7 +32,9 @@ const NotVerifiedInvoicesList = () => {
 
   return (
     <>
-      <h5>{t("measurements.invoiceSection.dueInvoicesList.title")}</h5>
+      <Link>
+        <h5>{t("measurements.invoiceSection.dueInvoicesList.title")}</h5>
+      </Link>
       <Table>
         <thead>
           <tr>
@@ -67,7 +70,7 @@ export const filterInvoicesByDueDate = (
 ) => {
   return invoices.filter((invoice) => {
     if (invoice.verified) {
-        return false;
+      return false;
     }
     const daysPassed = moment().diff(invoice.audit.createdOn, "days");
     if (dueLimitA && dueLimitB) {
