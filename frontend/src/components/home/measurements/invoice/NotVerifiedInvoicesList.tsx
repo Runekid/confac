@@ -6,6 +6,8 @@ import { Table } from "react-bootstrap";
 import moment from "moment";
 import InvoiceModel from "../../../invoice/models/InvoiceModel";
 import { Link } from "react-router-dom";
+import { Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 const NotVerifiedInvoicesList = () => {
   const models = useSelector((state: ConfacState) => ({
@@ -32,31 +34,37 @@ const NotVerifiedInvoicesList = () => {
 
   return (
     <>
-      <Link to={`/invoices`}>
-        <h5>{t("measurements.invoiceSection.dueInvoicesList.title")}</h5>
-      </Link>
-      <Table>
-        <thead>
-          <tr>
-            <th scope="col">
-              {t("measurements.invoiceSection.dueInvoicesList.list.ok")}
-            </th>
-            <th scope="col">
-              {t("measurements.invoiceSection.dueInvoicesList.list.warning")}
-            </th>
-            <th scope="col">
-              {t("measurements.invoiceSection.dueInvoicesList.list.danger")}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="table-success">{beforeDueLimitA}</td>
-            <td className="table-warning">{betweenDueLimits}</td>
-            <td className="table-danger">{afterDueLimitB}</td>
-          </tr>
-        </tbody>
-      </Table>
+      <Container>
+        <Row>
+          <Link to={`/invoices`}>
+            <h5>{t("measurements.invoiceSection.dueInvoicesList.title")}</h5>
+          </Link>
+          <Table>
+            <thead>
+              <tr>
+                <th scope="col">
+                  {t("measurements.invoiceSection.dueInvoicesList.list.ok")}
+                </th>
+                <th scope="col">
+                  {t(
+                    "measurements.invoiceSection.dueInvoicesList.list.warning"
+                  )}
+                </th>
+                <th scope="col">
+                  {t("measurements.invoiceSection.dueInvoicesList.list.danger")}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="table-success">{beforeDueLimitA}</td>
+                <td className="table-warning">{betweenDueLimits}</td>
+                <td className="table-danger">{afterDueLimitB}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Row>
+      </Container>
     </>
   );
 };
