@@ -1,11 +1,9 @@
 import NotVerifiedInvoicesList from "../measurements/invoice/NotVerifiedInvoicesList"
 
-const InvoiceSection = () => {
+export const InvoiceSection = () => {
   return (
     <>
     <NotVerifiedInvoicesList/>
     </>
   )
 }
-
-export default InvoiceSection

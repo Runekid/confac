@@ -300,7 +300,7 @@ export const trans = {
     total: 'Totaal',
     orderNr: 'Bestelbon referentie',
     orderNrShort: 'Bestelbon ref',
-    verifyAction: 'Factuur nu verifiëren',
+    verifyAction: 'Verifieren ongedaan maken',
     verifyActionTooltip: 'Factuur verifiëren<br>Openstaand voor {days} dagen',
     notVerifiedOnly: 'Enkel niet geverifiëerde?',
     groupByMonth: 'Groepeer per maand',
@@ -656,9 +656,9 @@ export const trans = {
       dueInvoicesList: {
         title: 'Openstaande facturen',
         list: {
-          ok: 'Factuur < 16 dagen open',
-          warning: 'Factuur 16 <= x <= 30 dagen open',
-          danger: 'Factuur > 30 dagen open'
+          ok: 'Factuur < {min} dagen open',
+          warning: 'Factuur {min} <= x <= {max} dagen open',
+          danger: 'Factuur {max} dagen open'
         }
       }
     }
