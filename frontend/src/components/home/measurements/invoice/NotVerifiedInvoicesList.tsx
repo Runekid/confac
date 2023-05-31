@@ -9,28 +9,16 @@ import { Link } from "react-router-dom";
 import { Row } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 
-const NotVerifiedInvoicesList = () => {
+export const NotVerifiedInvoicesList = () => {
   const models = useSelector((state: ConfacState) => ({
     invoices: state.invoices,
   }));
-  const dueLimitA = 16;
-  const dueLimitB = 30;
-  let beforeDueLimitA = filterInvoicesByDueDate(
-    models.invoices,
-    dueLimitA
-  ).length;
+  const minDueLimit = 16;
+  const maxDueLimit = 30;
 
-  let betweenDueLimits = filterInvoicesByDueDate(
-    models.invoices,
-    dueLimitA,
-    dueLimitB
-  ).length;
-
-  let afterDueLimitB = filterInvoicesByDueDate(
-    models.invoices,
-    undefined,
-    dueLimitB
-  ).length;
+  let beforeMinDueLimit = filterInvoicesByDueDate(models.invoices, minDueLimit).length;
+  let betweenDueLimits = filterInvoicesByDueDate(models.invoices, minDueLimit, maxDueLimit).length;
+  let afterMaxDueLimit = filterInvoicesByDueDate(models.invoices, undefined, maxDueLimit).length;
 
   return (
     <>
@@ -43,23 +31,22 @@ const NotVerifiedInvoicesList = () => {
             <thead>
               <tr>
                 <th scope="col">
-                  {t("measurements.invoiceSection.dueInvoicesList.list.ok")}
+                  {t("measurements.invoiceSection.dueInvoicesList.list.ok", { min: minDueLimit })}
                 </th>
                 <th scope="col">
                   {t(
-                    "measurements.invoiceSection.dueInvoicesList.list.warning"
-                  )}
+                    "measurements.invoiceSection.dueInvoicesList.list.warning", { min: minDueLimit, max: maxDueLimit })}
                 </th>
                 <th scope="col">
-                  {t("measurements.invoiceSection.dueInvoicesList.list.danger")}
+                  {t("measurements.invoiceSection.dueInvoicesList.list.danger", { max: maxDueLimit })}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="table-success">{beforeDueLimitA}</td>
+                <td className="table-success">{beforeMinDueLimit}</td>
                 <td className="table-warning">{betweenDueLimits}</td>
-                <td className="table-danger">{afterDueLimitB}</td>
+                <td className="table-danger">{afterMaxDueLimit}</td>
               </tr>
             </tbody>
           </Table>
@@ -69,27 +56,25 @@ const NotVerifiedInvoicesList = () => {
   );
 };
 
-export default NotVerifiedInvoicesList;
-
 export const filterInvoicesByDueDate = (
   invoices: InvoiceModel[],
-  dueLimitA?: number,
-  dueLimitB?: number
-) => {
-  return invoices.filter((invoice) => {
-    if (invoice.verified) {
+  minDueLimit?: number,
+  maxDueLimit?: number
+): InvoiceModel[] => {
+  return invoices
+    .filter(invoice => !invoice.verified)
+    .filter((invoice) => {
+      const daysPassed = moment().diff(invoice.audit.createdOn, "days");
+      if (minDueLimit && maxDueLimit) {
+        return daysPassed >= minDueLimit && daysPassed <= maxDueLimit;
+      }
+      if (minDueLimit) {
+        return daysPassed < minDueLimit;
+      }
+      if (maxDueLimit) {
+        return daysPassed > maxDueLimit;
+      }
       return false;
-    }
-    const daysPassed = moment().diff(invoice.audit.createdOn, "days");
-    if (dueLimitA && dueLimitB) {
-      return daysPassed >= dueLimitA && daysPassed <= dueLimitB;
-    }
-    if (dueLimitA) {
-      return daysPassed < dueLimitA;
-    } else if (dueLimitB) {
-      return daysPassed > dueLimitB;
-    }
-    return false;
-  });
+    });
 };
 

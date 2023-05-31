@@ -658,7 +658,7 @@ export const trans = {
         list: {
           ok: 'Factuur < {min} dagen open',
           warning: 'Factuur {min} <= x <= {max} dagen open',
-          danger: 'Factuur {max} dagen open'
+          danger: 'Factuur > {max} dagen open'
         }
       }
     }

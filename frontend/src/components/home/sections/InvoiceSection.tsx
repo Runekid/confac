@@ -1,9 +1,9 @@
-import NotVerifiedInvoicesList from "../measurements/invoice/NotVerifiedInvoicesList"
+import { NotVerifiedInvoicesList } from "../measurements/invoice/NotVerifiedInvoicesList"
 
 export const InvoiceSection = () => {
   return (
     <>
-    <NotVerifiedInvoicesList/>
+      <NotVerifiedInvoicesList />
     </>
   )
 }
